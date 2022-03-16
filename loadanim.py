@@ -8,9 +8,9 @@ def loadanimation(screen, screen_dimensions: tuple):
     for i in range(1, 10):
         disks.append(pygame.image.load(f'assets/diskimages/disk{i}.png'))
 
-    titlefont = pygame.font.SysFont('Copperplate', 100)
-    subtitlefont = pygame.font.SysFont('Andale Mono', 38)
-    subsubtitlefont = pygame.font.SysFont('Andale Mono', 20)
+    titlefont = pygame.font.Font('assets/copperplate.ttf', 75)
+    subtitlefont = pygame.font.Font('assets/andalemono.ttf', 38)
+    subsubtitlefont = pygame.font.Font('assets/andalemono.ttf', 20)
     loading = subtitlefont.render("Loading, please wait", True, (255, 255, 255))
     doneloading = subtitlefont.render("Finished, booting...", True, (255, 255, 255))
     title = titlefont.render("S. L. A. R. O. S.", True, (255, 255, 255))
@@ -25,7 +25,8 @@ def loadanimation(screen, screen_dimensions: tuple):
         screen.fill((0, 0, 0))
 
         for event in pygame.event.get():
-            pass
+            if event.type == pygame.QUIT:
+                exit()
 
         if count <= 8:
             screen.blit(disks[count], ((WIDTH/2)-150, 300))
@@ -53,9 +54,9 @@ def loadanimation(screen, screen_dimensions: tuple):
         if countdown == 0:
             break
             
-    for i in range(100, 30, -1):
+    for i in range(75, 20, -1):
         screen.fill((0, 0, 0))
-        titlefont = pygame.font.SysFont('Copperplate', i)
+        titlefont = pygame.font.Font('assets/copperplate.ttf', i)
         title = titlefont.render("S. L. A. R. O. S.", True, (255, 255, 255))
         screen.blit(title, (150, 50))
         pygame.display.update()
