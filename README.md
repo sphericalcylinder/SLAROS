@@ -1,0 +1,1 @@
+You must have Python 3 installed, since this program uses match statements. to start, just do `python3 boot.py` on linux or mac, or `python boot.py` on windows.
