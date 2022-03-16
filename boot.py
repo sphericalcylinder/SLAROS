@@ -7,7 +7,7 @@ screen = pygame.display.set_mode(SCREEN_DIM)
 pygame.event.set_allowed(
     [pygame.QUIT, pygame.KEYDOWN, pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP])
 
-#loadanim.loadanimation(screen, SCREEN_DIM)
+loadanim.loadanimation(screen, SCREEN_DIM)
 
 titlefont = pygame.font.SysFont('Copperplate', 30)
 title = titlefont.render("S. L. A. R. O. S.", True, (0, 0, 0))
