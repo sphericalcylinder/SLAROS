@@ -26,7 +26,6 @@ while True:
     currentkey = ''
     waslen = len(sentencelist)
     result = None
-    respsent = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -41,12 +40,15 @@ while True:
                 stringkeylist = ''.join(keylist)
                 sentencelist.append([stringkeylist, [20, 620]])
                 result = commandprocessor.match_command(stringkeylist)
-                if result is not None:
-                    respsent = True
+                if result is None:
+                    result = 'Invalid'
                 keylist = []
             elif currentkey == 'backspace':
                 keylist.reverse()
-                keylist.remove(keylist[0])
+                try:
+                    keylist.remove(keylist[0])
+                except:
+                    pass
                 keylist.reverse()
             else:
                 keylist.append(currentkey)
@@ -62,11 +64,7 @@ while True:
         waslen = currlen
     for x in sentencelist:
         if goup:
-            if respsent:
-                x[1][1] -= 50
-                respsent = False
-            else:
-                x[1][1] -= 25
+            x[1][1] -= 25
         c = subtitlefont.render(f'JSH $ {"".join(x[0])}', True, (0, 0, 0))
         screen.blit(c, x[1])
     goup = False
