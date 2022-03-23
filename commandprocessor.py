@@ -5,7 +5,7 @@ def match_command(command):
         case 'pwd':
             return os.getcwd()
         case 'ls':
-            return os.listdir(os.getcwd())
+            return ', '.join(os.listdir(os.getcwd()))
         case 'exit':
             sys.exit(0)
         case 'fexit':

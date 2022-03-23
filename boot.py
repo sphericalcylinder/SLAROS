@@ -4,14 +4,15 @@ import keyprocessor, commandprocessor, loadanim
 
 SCREEN_DIM = WIDTH, HEIGHT = (1000, 675)
 screen = pygame.display.set_mode(SCREEN_DIM)
+pygame.font.init()
 pygame.event.set_allowed(
-    [pygame.QUIT, pygame.KEYDOWN, pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP])
+    [pygame.QUIT, pygame.KEYDOWN])
 
 loadanim.loadanimation(screen, SCREEN_DIM)
 
-titlefont = pygame.font.SysFont('Copperplate', 30)
+titlefont = pygame.font.Font('assets/copperplate.ttf', 20)
 title = titlefont.render("S. L. A. R. O. S.", True, (0, 0, 0))
-subtitlefont = pygame.font.SysFont('Andale Mono', 20)
+subtitlefont = pygame.font.Font('assets/andalemono.ttf', 12)
 
 keylist = []
 sentencelist = []
@@ -25,6 +26,7 @@ while True:
     currentkey = ''
     waslen = len(sentencelist)
     result = None
+    respsent = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -40,7 +42,7 @@ while True:
                 sentencelist.append([stringkeylist, [20, 620]])
                 result = commandprocessor.match_command(stringkeylist)
                 if result is not None:
-                    goup = True
+                    respsent = True
                 keylist = []
             elif currentkey == 'backspace':
                 keylist.reverse()
@@ -52,7 +54,7 @@ while True:
 
     if result is not None:
         sentencelist.append([result, [20, 620]])
-    sentence = subtitlefont.render(f">>> {''.join(keylist)}", True, (0, 0, 0))
+    sentence = subtitlefont.render(f"JSH $ {''.join(keylist)}", True, (0, 0, 0))
     screen.blit(sentence, (20, 630))
 
     if waslen != currlen:
@@ -60,8 +62,12 @@ while True:
         waslen = currlen
     for x in sentencelist:
         if goup:
+            if respsent:
+                x[1][1] -= 50
+                respsent = False
+            else:
                 x[1][1] -= 25
-        c = subtitlefont.render(f'>>> {"".join(x[0])}', True, (0, 0, 0))
+        c = subtitlefont.render(f'JSH $ {"".join(x[0])}', True, (0, 0, 0))
         screen.blit(c, x[1])
     goup = False
 
