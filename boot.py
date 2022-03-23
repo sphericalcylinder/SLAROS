@@ -43,7 +43,9 @@ while True:
                     goup = True
                 keylist = []
             elif currentkey == 'backspace':
-                keylist.remove(keylist[len(keylist)-1])
+                keylist.reverse()
+                keylist.remove(keylist[0])
+                keylist.reverse()
             else:
                 keylist.append(currentkey)
     currlen = len(sentencelist)
