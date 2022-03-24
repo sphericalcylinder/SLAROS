@@ -10,9 +10,9 @@ pygame.event.set_allowed(
 
 loadanim.loadanimation(screen, SCREEN_DIM)
 
-titlefont = pygame.font.Font('assets/copperplate.ttf', 20)
+titlefont = pygame.font.Font('copperplate.ttf', 20)
 title = titlefont.render("S. L. A. R. O. S.", True, (0, 0, 0))
-subtitlefont = pygame.font.Font('assets/andalemono.ttf', 12)
+subtitlefont = pygame.font.Font('andalemono.ttf', 12)
 
 keylist = []
 sentencelist = []
