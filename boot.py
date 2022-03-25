@@ -1,14 +1,15 @@
 import os, sys, time
 import pygame
-import keyprocessor, commandprocessor, loadanim
+import keyprocessor, commandprocessor, loadanim, wordlist
 
 SCREEN_DIM = WIDTH, HEIGHT = (1000, 675)
 screen = pygame.display.set_mode(SCREEN_DIM)
+pygame.display.set_caption("S.L.A.R.O.S.", "SLAROS")
 pygame.font.init()
 pygame.event.set_allowed(
     [pygame.QUIT, pygame.KEYDOWN])
 
-loadanim.loadanimation(screen, SCREEN_DIM)
+#loadanim.loadanimation(screen, SCREEN_DIM)
 
 titlefont = pygame.font.Font('copperplate.ttf', 20)
 title = titlefont.render("S. L. A. R. O. S.", True, (0, 0, 0))
@@ -16,7 +17,6 @@ subtitlefont = pygame.font.Font('andalemono.ttf', 12)
 
 keylist = []
 sentencelist = []
-sentencey = 620
 goup = False
 shift = False
 
@@ -38,10 +38,16 @@ while True:
             currentkey = keyprocessor.getkey(event.key, shift)
             if currentkey == 'return':
                 stringkeylist = ''.join(keylist)
-                sentencelist.append([stringkeylist, [20, 620]])
                 result = commandprocessor.match_command(stringkeylist)
                 if result is None:
-                    result = 'Invalid'
+                    sentencelist.append(wordlist.Sentence(stringkeylist, 600, True))
+                    sentencelist.append(wordlist.Sentence('Invalid', 625, False))
+                else:
+                    if result == 'clear':
+                        sentencelist = []
+                    else:
+                        sentencelist.append(wordlist.Sentence(stringkeylist, 600, True))
+                        sentencelist.append(wordlist.Sentence(result, 625, False))
                 keylist = []
             elif currentkey == 'backspace':
                 keylist.reverse()
@@ -54,19 +60,18 @@ while True:
                 keylist.append(currentkey)
     currlen = len(sentencelist)
 
-    if result is not None:
-        sentencelist.append([result, [20, 620]])
+
     sentence = subtitlefont.render(f"JSH $ {''.join(keylist)}", True, (0, 0, 0))
     screen.blit(sentence, (20, 630))
 
     if waslen != currlen:
+        diff = currlen - waslen
         goup = True
-        waslen = currlen
     for x in sentencelist:
         if goup:
-            x[1][1] -= 25
-        c = subtitlefont.render(f'JSH $ {"".join(x[0])}', True, (0, 0, 0))
-        screen.blit(c, x[1])
+            x.updatey(diff)
+        sentence = x.loadsentence()
+        screen.blit(sentence[0], sentence[1])
     goup = False
 
     screen.blit(title, (10, 10))

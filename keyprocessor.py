@@ -85,6 +85,10 @@ def getkey(key, shift: bool):
                 return '.'
             case pygame.K_QUOTE:
                 return "'"
+            case pygame.K_SLASH:
+                return '/'
+            case pygame.K_BACKSLASH:
+                return '\\'
             case _:
                 return ''
     elif shift:
@@ -171,5 +175,9 @@ def getkey(key, shift: bool):
                 return '.'
             case pygame.K_QUOTE:
                 return '"'
+            case pygame.K_SLASH:
+                return '?'
+            case pygame.K_BACKSLASH:
+                return '|'
             case _:
                 return ''

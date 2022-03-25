@@ -6,10 +6,10 @@ def match_command(command):
             return os.getcwd()
         case 'ls':
             return ', '.join(os.listdir(os.getcwd()))
+        case 'clear':
+            return 'clear'
         case 'exit':
             sys.exit(0)
-        case 'fexit':
-            sys.exit('Forced Exit')
         case _:
             if command[0:3] == 'cpa':
                 os.chdir(command[4:])
