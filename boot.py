@@ -1,4 +1,5 @@
 import os, sys, time
+os.system('pip3 install pygame')
 import pygame
 import keyprocessor, commandprocessor, loadanim, wordlist
 
@@ -9,7 +10,7 @@ pygame.font.init()
 pygame.event.set_allowed(
     [pygame.QUIT, pygame.KEYDOWN])
 
-#loadanim.loadanimation(screen, SCREEN_DIM)
+loadanim.loadanimation(screen, SCREEN_DIM)
 
 titlefont = pygame.font.Font('copperplate.ttf', 20)
 title = titlefont.render("S. L. A. R. O. S.", True, (0, 0, 0))
