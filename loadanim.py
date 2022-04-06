@@ -1,4 +1,4 @@
-import pygame, sys, time
+import pygame, sys, time, os
 
 pygame.font.init()
 def loadanimation(screen, screen_dimensions: tuple):
@@ -7,11 +7,11 @@ def loadanimation(screen, screen_dimensions: tuple):
     disks = []
     try:
         for i in range(1, 10):
-            disks.append(pygame.image.load(f'diskimages/disk{i}.png'))
+            disks.append(pygame.image.load(os.environ['SLAROSDIR']+f'\\diskimages\\disk{i}.png'))
     except:
         disks = []
         for i in range(1, 10):
-            disks.append(pygame.image.load(f'assets/diskimages/disk{i}.png'))
+            disks.append(pygame.image.load(os.environ['SLAROSDIR']+f'\\assets\\diskimages\\disk{i}.png'))
 
     titlefont = pygame.font.Font('copperplate.ttf', 75)
     subtitlefont = pygame.font.Font('andalemono.ttf', 38)

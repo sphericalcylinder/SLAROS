@@ -3,6 +3,14 @@ os.system('pip3 install pygame')
 import pygame
 import keyprocessor, commandprocessor, loadanim, wordlist
 
+os.environ['SLAROSDIR'] = os.getcwd()
+
+def mfn(filename):
+    """Makes a proper path to a file in the directory this is in"""
+    return f"{os.environ['SLAROSDIR']}\\{filename}"
+
+
+
 SCREEN_DIM = WIDTH, HEIGHT = (1000, 675)
 screen = pygame.display.set_mode(SCREEN_DIM)
 pygame.display.set_caption("S.L.A.R.O.S.", "SLAROS")
@@ -12,15 +20,15 @@ pygame.event.set_allowed(
 
 loadanim.loadanimation(screen, SCREEN_DIM)
 
-titlefont = pygame.font.Font('copperplate.ttf', 20)
+titlefont = pygame.font.Font(mfn('copperplate.ttf'), 20)
 title = titlefont.render("S. L. A. R. O. S.", True, (0, 0, 0))
-subtitlefont = pygame.font.Font('andalemono.ttf', 12)
+subtitlefont = pygame.font.Font(mfn('andalemono.ttf'), 12)
 
 keylist = []
 sentencelist = []
 goup = False
 shift = False
-
+vdir = os.getcwd()
 
 while True:
     screen.fill((255, 255, 255))

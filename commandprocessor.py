@@ -12,6 +12,10 @@ def match_command(command):
             sys.exit(0)
         case _:
             if command[0:3] == 'cpa':
-                os.chdir(command[4:])
+                try:
+                    os.chdir(command[4:])
+                    return f'Directory now {os.getcwd()}'
+                except:
+                    return None
             else:
                 return None
