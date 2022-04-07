@@ -1,14 +1,19 @@
 import os, sys, time
-os.system('pip3 install pygame')
-import pygame
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
+
+try:
+    import pygame
+except:
+    os.system("pip3 install pygame -q")
+    import pygame
 import keyprocessor, commandprocessor, loadanim, wordlist
 
 os.environ['SLAROSDIR'] = os.getcwd()
 
 def mfn(filename):
     """Makes a proper path to a file in the directory this is in"""
-    return f"{os.environ['SLAROSDIR']}\\{filename}"
-
+    return f"{os.environ['SLAROSDIR']}/{filename}"
 
 
 SCREEN_DIM = WIDTH, HEIGHT = (1000, 675)
