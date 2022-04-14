@@ -29,7 +29,7 @@ pygame.event.set_allowed(
     [pygame.QUIT, pygame.KEYDOWN])
 
 # Display loading animation
-#loadanim.loadanimation(screen, SCREEN_DIM)
+loadanim.loadanimation(screen, SCREEN_DIM)
 
 (color1, color2) = colors = configify.config()
 
