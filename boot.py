@@ -9,7 +9,8 @@ try:
 except: #install if it's not
     os.system("pip3 install pygame -q")
     import pygame
-import keyprocessor, commandprocessor, loadanim, wordlist, linewrap
+import keyprocessor, commandprocessor, \
+    loadanim, wordlist, linewrap, configify
 
 #Get the directory that we're in
 os.environ['SLAROSDIR'] = os.getcwd()
@@ -30,9 +31,11 @@ pygame.event.set_allowed(
 # Display loading animation
 #loadanim.loadanimation(screen, SCREEN_DIM)
 
+(color1, color2) = colors = configify.config()
+
 # Prepare fonts
 titlefont = pygame.font.Font(mfn('copperplate.ttf'), 20)
-title = titlefont.render("S. L. A. R. O. S.", True, (0, 0, 0))
+title = titlefont.render("S. L. A. R. O. S.", True, color2)
 subtitlefont = pygame.font.Font(mfn('andalemono.ttf'), 12)
 
 # Set some variables for the while loop
@@ -43,7 +46,7 @@ shift = False
 
 while True:
     # Fill screen with white
-    screen.fill((255, 255, 255))
+    screen.fill(color1)
     currentkey = ''
     waslen = len(sentencelist)
     result = None
@@ -65,14 +68,14 @@ while True:
                 result = commandprocessor.match_command(stringkeylist)
                 if result == None:
                     # If not, display invalid
-                    sentencelist.append(wordlist.Sentence(stringkeylist, 600, True))
-                    sentencelist.append(wordlist.Sentence('Invalid', 625, False))
+                    sentencelist.append(wordlist.Sentence(stringkeylist, 600, True, colors))
+                    sentencelist.append(wordlist.Sentence('Invalid', 625, False, colors))
                 else:
                     # Clear the screen
                     if result == 'clear':
                         sentencelist = []
                     # Line wrapping
-                    linewrap.wrap(sentencelist, stringkeylist, result)
+                    linewrap.wrap(sentencelist, stringkeylist, result, colors)
                 keylist = []
             elif currentkey == 'backspace':
                 # Do fancy backspace stuff
@@ -87,7 +90,7 @@ while True:
     currlen = len(sentencelist)
 
 
-    sentence = subtitlefont.render(f"JSH $ {''.join(keylist)}", True, (0, 0, 0))
+    sentence = subtitlefont.render(f"JSH $ {''.join(keylist)}", True, color2)
     screen.blit(sentence, (20, 630))
 
     # Check if there's a new line
