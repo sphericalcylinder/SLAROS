@@ -73,17 +73,6 @@ while True:
                         sentencelist = []
                     # Line wrapping
                     linewrap.wrap(sentencelist, stringkeylist, result)
-                    #sentencelist.append(wordlist.Sentence(stringkeylist, 600, True))
-                    #sentencelist.append(wordlist.Sentence(result, 625, False))
-                    #if len(result) <= 135:
-                    #    sentencelist.append(wordlist.Sentence(stringkeylist, 600, True))
-                    #    sentencelist.append(wordlist.Sentence(result, 625, False))
-                    #else:
-                    #    sentencelist.append(wordlist.Sentence(stringkeylist, 575, True))
-                    #    result1 = result[:135]
-                    #    result2 = result[135:]
-                    #    sentencelist.append(wordlist.Sentence(result1, 600, False))
-                    #    sentencelist.append(wordlist.Sentence(result2, 625, False))
                 keylist = []
             elif currentkey == 'backspace':
                 # Do fancy backspace stuff
