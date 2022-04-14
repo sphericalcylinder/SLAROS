@@ -20,10 +20,4 @@ class Sentence:
             return [self.font.render(self.txt, True, (0, 0, 0)), [20, self.y]]
 
     def updatey(self, diff: int):
-        match diff:
-            case 1:
-                self.y -= 25
-            case 2:
-                self.y -= 50
-            case 3:
-                self.y -= 75
+        self.y -= diff * 25

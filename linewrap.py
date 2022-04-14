@@ -7,12 +7,12 @@ def wrap(sentencelist: list, stringkeylist: str, result: str):
     else:
         results = []
         sliceindex = 135
-        yval = 600
+        y = 650
         for i in range(len(result)//135):
             results.append(result[:sliceindex])
             results.append(result[sliceindex:])
-        sentencelist.append(wordlist.Sentence(stringkeylist, yval, True))
-        yval -= 25
-        for b in reversed(results):
-            sentencelist.append(wordlist.Sentence(b, yval, False))
-            yval -= 25
+        y -= len(results) * 25
+        sentencelist.append(wordlist.Sentence(stringkeylist, y, True))
+        for b in results:
+            y += 25
+            sentencelist.append(wordlist.Sentence(b, y, False))
