@@ -1,14 +1,12 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import configify, linewrap
-
-
-colors = configify.config()
+import linewrap
 
 def sprint(string: str, newline: bool = False):
 
-    from boot import sentencelist, stringkeylist
+    from boot import sentencelist, stringkeylist, colors
+    
     if not newline:
         linewrap.wrap(sentencelist, stringkeylist, string, colors)
     if newline:

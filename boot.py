@@ -44,6 +44,7 @@ keylist = []
 sentencelist = []
 goup = False
 shift = False
+runscript = False
 
 while True:
     # Fill screen with white
@@ -75,11 +76,8 @@ while True:
                     # Clear the screen
                     if result == 'clear':
                         sentencelist = []
-                    elif result.startswith('run '):
-                        file = result[:4]
-                        file = file.removesuffix('.py')
-                        file = file.removeprefix('run ')
-                        exec(f'import {file}')
+                    if result.endswith('_slars.py'):
+                        runscript = True
                     # Line wrapping
                     linewrap.wrap(sentencelist, stringkeylist, result, colors)
                 keylist = []
@@ -115,5 +113,15 @@ while True:
     goup = False
 
     screen.blit(title, (10, 10))
+
+    if runscript:
+        result = result.removesuffix('.py')
+        try:
+            exec(f"from scripts import {result}")
+            exec(f"{result}.run()")
+        except:
+            pass
+        runscript = False
+        
 
     pygame.display.update()

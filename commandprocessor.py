@@ -20,10 +20,6 @@ def match_command(command):
             elif command[:4] == 'echo':
                 return command[5:]
             elif command[:3] == 'run':
-                filename: str = command[4:]
-                if filename.endswith('_slars.py'):
-                    return command
-                else:
-                    return None
+                return command[4:]
             else:
                 return None
