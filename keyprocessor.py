@@ -91,6 +91,8 @@ def getkey(key, shift: bool):
                 return '\\'
             case pygame.K_SEMICOLON:
                 return ';'
+            case pygame.K_MINUS:
+                return '-'
             case _:
                 return ''
     elif shift:
@@ -183,5 +185,7 @@ def getkey(key, shift: bool):
                 return '|'
             case pygame.K_SEMICOLON:
                 return ':'
+            case pygame.K_MINUS:
+                return '_'
             case _:
                 return ''

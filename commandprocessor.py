@@ -11,11 +11,19 @@ def match_command(command):
         case 'exit':
             sys.exit(0)
         case _:
-            if command[0:3] == 'cpa':
+            if command[:2] == 'cd':
                 try:
-                    os.chdir(command[4:])
+                    os.chdir(command[3:])
                     return f'Directory now {os.getcwd()}'
                 except:
+                    return None
+            elif command[:4] == 'echo':
+                return command[5:]
+            elif command[:3] == 'run':
+                filename: str = command[4:]
+                if filename.endswith('_slars.py'):
+                    return command
+                else:
                     return None
             else:
                 return None

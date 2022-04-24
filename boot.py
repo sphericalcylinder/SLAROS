@@ -6,13 +6,13 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
 # Try to import pygame
 try:
     import pygame
-except: #install if it's not
+except: #install if it's not already
     os.system("pip3 install pygame -q")
     import pygame
 import keyprocessor, commandprocessor, \
     loadanim, wordlist, linewrap, configify
 
-#Get the directory that we're in
+# Get the directory that we're in
 os.environ['SLAROSDIR'] = os.getcwd()
 
 # Function to make direct paths easier
@@ -29,13 +29,14 @@ pygame.event.set_allowed(
     [pygame.QUIT, pygame.KEYDOWN])
 
 # Display loading animation
-loadanim.loadanimation(screen, SCREEN_DIM)
+#loadanim.loadanimation(screen, SCREEN_DIM)
 
-(color1, color2) = colors = configify.config()
+# Set sysconfig.json variables
+colors = configify.config()
 
 # Prepare fonts
 titlefont = pygame.font.Font(mfn('copperplate.ttf'), 20)
-title = titlefont.render("S. L. A. R. O. S.", True, color2)
+title = titlefont.render("S. L. A. R. O. S.", True, colors[1])
 subtitlefont = pygame.font.Font(mfn('andalemono.ttf'), 12)
 
 # Set some variables for the while loop
@@ -46,7 +47,7 @@ shift = False
 
 while True:
     # Fill screen with white
-    screen.fill(color1)
+    screen.fill(colors[0])
     currentkey = ''
     waslen = len(sentencelist)
     result = None
@@ -74,6 +75,11 @@ while True:
                     # Clear the screen
                     if result == 'clear':
                         sentencelist = []
+                    elif result.startswith('run '):
+                        file = result[:4]
+                        file = file.removesuffix('.py')
+                        file = file.removeprefix('run ')
+                        exec(f'import {file}')
                     # Line wrapping
                     linewrap.wrap(sentencelist, stringkeylist, result, colors)
                 keylist = []
@@ -90,7 +96,7 @@ while True:
     currlen = len(sentencelist)
 
 
-    sentence = subtitlefont.render(f"JSH $ {''.join(keylist)}", True, color2)
+    sentence = subtitlefont.render(f"JSH $ {''.join(keylist)}", True, colors[1])
     screen.blit(sentence, (20, 630))
 
     # Check if there's a new line
